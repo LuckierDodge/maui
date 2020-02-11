@@ -442,7 +442,7 @@ enum {
 #define MAX_VAL      2140000000
 
 //#define MMAX_JOB           4096
-#define MMAX_JOB           800000
+#define MMAX_JOB            80000
 #define MAX_MJOB       MMAX_JOB
 
 
