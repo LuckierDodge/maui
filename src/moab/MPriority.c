@@ -1229,8 +1229,10 @@ int MJobGetStartPriority(
       CFactor[index];
 
     //Mira priority function: (queued_time - hold_time)^2 / requested_walltime^3 * requested_nodes / total_machine_nodes * project_weight
-    Prio  *= (double)CWeight[index] * CFactor[index] / 49152;
-    APrio *= ABS((double)CWeight[index] * CFactor[index] / 49152); 
+    if (CFactor[index] != 0) { // Avoid destructive multiplication for deactivated factors
+      Prio  *= (double)CWeight[index] * CFactor[index] / 49152;
+      APrio *= ABS((double)CWeight[index] * CFactor[index] / 49152); 
+	}
     }  /* END for (index) */
 
   if ((BPtr != NULL) && (*BPtr != NULL))
