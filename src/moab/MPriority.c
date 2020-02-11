@@ -1117,6 +1117,8 @@ int MJobGetStartPriority(
  
   SFactor[mpsSQT] = MAX(0.0,(double)((long)MSched.Time - EffQTime) / 60.0);
 
+  SFactor[mpsSQT *= SFactor[mpsSQT]; // Mira priority function uses (EffectiveQueueTime)^2
+
   SFactor[mpsSXF] = (double)XFactor;
 
   SFactor[mpsSSPV] = (J->Flags & (1 << mjfSPViolation)) ? 1.0 : 0.0;
@@ -1186,7 +1188,7 @@ int MJobGetStartPriority(
   if ((J->Cred.U != NULL) && (&J->Cred.U->L.AP != NULL))
     SFactor[mpsRUJob] = J->Cred.U->L.AP.Usage[mptMaxJob][0];
 
-  SFactor[mpsRWallTime] = J->WCLimit; 
+  SFactor[mpsRWallTime] = 1 / ((J->WCLimit) * (J->WCLimit) * (J->WCLimit)); // Mira Priority function uses (Walltime)^-3 
           
   MJobGetPE(J,GP,&SFactor[mpsRPE]);
  
@@ -1217,8 +1219,8 @@ int MJobGetStartPriority(
     }
 */
 
-  Prio = 0.0;
-  APrio = 0.0;
+  Prio = 1.0;
+  APrio = 1.0;
 
   for (index = mpcServ;index <= mpcUsage;index++)
     {
@@ -1226,8 +1228,9 @@ int MJobGetStartPriority(
       MIN(CFactor[index],CCap[index]) : 
       CFactor[index];
 
-    Prio  += (double)CWeight[index] * CFactor[index];
-    APrio += ABS((double)CWeight[index] * CFactor[index]);
+    //Mira priority function: (queued_time - hold_time)^2 / requested_walltime^3 * requested_nodes / total_machine_nodes * project_weight
+    Prio  *= (double)CWeight[index] * CFactor[index] / 49152;
+    APrio *= ABS((double)CWeight[index] * CFactor[index] / 49152); 
     }  /* END for (index) */
 
   if ((BPtr != NULL) && (*BPtr != NULL))
