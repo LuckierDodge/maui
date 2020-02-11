@@ -441,11 +441,13 @@ enum {
 
 #define MAX_VAL      2140000000
 
-#define MMAX_JOB           4096
+//#define MMAX_JOB           4096
+#define MMAX_JOB           800000
 #define MAX_MJOB       MMAX_JOB
 
 
 #define MAX_MJOB_TRACE     4096
+//#define MAX_MJOB_TRACE     32000
 
 #define MAX_TASK_REQUESTS    32
 #define MAX_REQ_TYPE         16
@@ -463,7 +465,7 @@ enum {
 #define MAX_MSRES           128
 #define MAX_SRES_DEPTH       64
 #define MAX_MRANGE          256
-#define MAX_PRIO_VAL 1000000000
+#define MAX_PRIO_VAL 1000000000000
 #define MAX_ATTEMPTS        500
 #define MAX_MADMINUSERS      64
 #define MAX_MADMINHOSTS      64

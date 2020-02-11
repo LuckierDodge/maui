@@ -6460,7 +6460,7 @@ int UIResCreate(
     P = &MPar[0];
 
   /* adjust for simulation time discrepancies */
-
+/*
   if (MSched.Mode == msmSim)
     {
     StartTime += (MSched.Time - ClientTime);
@@ -6468,7 +6468,7 @@ int UIResCreate(
     if (EndTime < MAX_MTIME)
       EndTime += (MSched.Time - ClientTime);
     }
-
+*/
   StartTime = MAX(StartTime,MSched.Time);
 
   if (StartTime >= EndTime)

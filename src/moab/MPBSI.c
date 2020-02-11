@@ -135,7 +135,7 @@ particular circumstance, the balance of the LICENSE will continue to apply.
 # define ATTR_NODE_np  "np"
 char *getreq();
 #endif /* __MPBS21 */
-
+#include "pbs_internal.h"
 #include "moab.h"
 #include "msched-proto.h"
 

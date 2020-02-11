@@ -747,6 +747,7 @@ int MSimGetWorkload()
     MResAdjustTime(NewTime - MSched.Time);
  
     MSched.Time = NewTime;
+    MStat.InitTime = NewTime;
     }
  
   return(SUCCESS);
@@ -1843,7 +1844,7 @@ int MSimJobSubmit(
     {
     /* adjust job queue time */
 
-    J->SubmitTime = MSched.Time;
+    // removed: J->SubmitTime = MSched.Time;
     }
 
   J->SystemQueueTime = J->SubmitTime;
