@@ -1117,7 +1117,7 @@ int MJobGetStartPriority(
  
   SFactor[mpsSQT] = MAX(0.0,(double)((long)MSched.Time - EffQTime) / 60.0);
 
-  SFactor[mpsSQT *= SFactor[mpsSQT]; // Mira priority function uses (EffectiveQueueTime)^2
+  SFactor[mpsSQT] *= SFactor[mpsSQT]; // Mira priority function uses (EffectiveQueueTime)^2
 
   SFactor[mpsSXF] = (double)XFactor;
 
